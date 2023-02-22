@@ -5,7 +5,7 @@ WORKDIR /myapp
 COPY ./src/Gemfile /myapp/Gemfile
 COPY ./src/Gemfile.lock /myapp/Gemfile.lock
 COPY ./docker/app/entrypoint.sh /usr/bin/
-RUN bundle install
+RUN bundle install --path vendor/bundle
 RUN chmod +x /usr/bin/entrypoint.sh
 RUN apt install -y sudo
 

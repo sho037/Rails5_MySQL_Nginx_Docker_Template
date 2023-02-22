@@ -1,4 +1,4 @@
-bundle install
+bundle install --path vendor/bundle
 bundle update
 bundle exec rails db:create
 bundle exec rails db:migrate
