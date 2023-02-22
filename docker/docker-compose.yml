@@ -1,0 +1,52 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: ./docker/app/Dockerfile
+    tty: true
+    volumes:
+      - ../src:/myapp
+    depends_on:
+      - mysql
+    working_dir: /myapp
+    command: sh /usr/bin/entrypoint.sh
+    ports:
+      - "3000:3000"
+    user: user
+
+  mysql:
+    build: 
+      context: ..
+      dockerfile: ./docker/mysql/Dockerfile
+    volumes:
+      - ./mysql/tmp/db:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: myapp_development
+      MYSQL_USER: myapp_user
+      MYSQL_PASSWORD: password
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ..
+      dockerfile: ./docker/nginx/Dockerfile
+    environment:
+      TZ: Asia/Tokyo
+    ports:
+      - "80:80"
+    volumes:
+      - ../src:/var/www/myapp
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/log:/var/log/nginx
+      - ./nginx/ssl:/etc/nginx/conf.d/ssl
+    working_dir: /var/www
+    depends_on:
+      - app
+    tty: true
+
+volumes:
+  dbdata:
+  myapp:
