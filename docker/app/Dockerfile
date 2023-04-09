@@ -1,11 +1,12 @@
-FROM ruby:2.7
+FROM ruby:2.7.7
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY ./src/Gemfile /myapp/Gemfile
 COPY ./src/Gemfile.lock /myapp/Gemfile.lock
 COPY ./docker/app/entrypoint.sh /usr/bin/
-RUN bundle install --path vendor/bundle
+RUN bundle config set path 'vendor/bundle'
+RUN bundle install
 RUN chmod +x /usr/bin/entrypoint.sh
 RUN apt install -y sudo
 
