@@ -7,18 +7,12 @@
 　こちらのリポジトリの右上にあるUse this templateを押してお好きなリポジトリ名をつけてリポジトリを作成してください。その後、各コマンドを順次打ち込んでください。
 
 ```bash
-cd docker
 docker-compose build
-docker-compose up -d
-docker-compose run app bash
-bundle install
-bundle update 
-bundle exec rails new .
-rm -rf .git/
-exit
-docker-compose down
 docker-compose up -d
 ```
 
 　その後、`localhost`もしくは`localhost:3000`にアクセスしていただくと利用できます。
 
+## 一言
+
+　じゃんじゃん使ってください。もし、何かあれば、Issueにてご連絡ください。
