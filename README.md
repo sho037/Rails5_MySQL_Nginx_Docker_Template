@@ -1,6 +1,6 @@
 # Rails5・MySQL・NginxをDockerで構築
 
-　こちらのテンプレートリポジトリはRails5をMySQLが利用できるし、Nginxでも動作できるような環境をDockerにて構築できるテンプレートとなっています。
+　こちらのテンプレートリポジトリはRails5でMySQLが利用でき、Nginxでも動作する環境をDockerにて構築できるテンプレートとなっています。使用するにはDockerをインストールしてください。
 
 ## How to install
 
