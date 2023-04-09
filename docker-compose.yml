@@ -2,11 +2,11 @@ version: '3'
 services:
   app:
     build:
-      context: ..
+      context: .
       dockerfile: ./docker/app/Dockerfile
     tty: true
     volumes:
-      - ../src:/myapp
+      - ./src:/myapp
     depends_on:
       - mysql
     working_dir: /myapp
@@ -17,10 +17,10 @@ services:
 
   mysql:
     build: 
-      context: ..
+      context: .
       dockerfile: ./docker/mysql/Dockerfile
     volumes:
-      - ./mysql/tmp/db:/var/lib/mysql
+      - ./docker/mysql/tmp/db:/var/lib/mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
@@ -33,17 +33,17 @@ services:
   nginx:
     container_name: nginx
     build:
-      context: ..
+      context: .
       dockerfile: ./docker/nginx/Dockerfile
     environment:
       TZ: Asia/Tokyo
     ports:
       - "80:80"
     volumes:
-      - ../src:/var/www/myapp
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/log:/var/log/nginx
-      - ./nginx/ssl:/etc/nginx/conf.d/ssl
+      - ./src:/var/www/myapp
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/log:/var/log/nginx
+      - ./docker/nginx/ssl:/etc/nginx/conf.d/ssl
     working_dir: /var/www
     depends_on:
       - app
