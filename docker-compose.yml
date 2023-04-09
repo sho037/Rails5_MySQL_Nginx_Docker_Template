@@ -1,6 +1,7 @@
 version: '3'
 services:
   app:
+    container_name: app
     build:
       context: .
       dockerfile: ./docker/app/Dockerfile
@@ -16,6 +17,7 @@ services:
     user: user
 
   mysql:
+    container_name: mysql
     build: 
       context: .
       dockerfile: ./docker/mysql/Dockerfile
